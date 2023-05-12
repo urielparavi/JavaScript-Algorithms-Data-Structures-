@@ -1,29 +1,16 @@
-const validAnagram = (first, second) => {
-  if (first.length !== second.length) {
-    return false;
-  }
-
-  const lookup = {};
-
-  for (let i = 0; i < first.length; i++) {
-    let letter = first[i];
-    // if letter exists, increment otherwise set to 1
-    lookup[letter] ? (lookup[letter] += 1) : (lookup[letter] = 1);
-  }
-  console.log(lookup);
-
-  for (let i = 0; i < second.length; i++) {
-    let letter = second[i];
-    // cant find letter or letter is zero then it's not an anagram
-    if (!lookup[letter]) {
-      return false;
+const sumZero = (arr) => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left < right) {
+    let sum = arr[left] + arr[right];
+    if (sum === 0) {
+      return [arr[left], arr[right]];
+    } else if (sum > 0) {
+      right--;
     } else {
-      lookup[letter] -= 1;
+      left++;
     }
   }
-
-  return true;
 };
 
-// {a: 3, n: 1, g: 1, r: 1, m: 1}
-validAnagram('anagram', 'nagaram');
+console.log(sumZero([-4, -5, -6, -8, 0, 1, 2, 3, 10]));
