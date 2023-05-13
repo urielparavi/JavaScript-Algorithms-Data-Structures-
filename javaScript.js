@@ -1,21 +1,30 @@
-const takeShower = () => {
-  return 'Showering!';
+// Recursion
+const countDown = (num) => {
+  if (num <= 0) {
+    console.log('All done!');
+    return;
+  }
+  console.log(num);
+  num--;
+  countDown(num);
 };
 
-const eatBreakfast = () => {
-  let meal = cookFood();
-  return `Eating ${meal}`;
-};
+// print 3
+// countDown(2);
+// print 2
+// countDown(1);
+// print 1
+// countDown(0); => this is the base case (our end point)
+// print "All done!"
 
-const cookFood = () => {
-  let items = ['Oatmeal', 'Eggs', 'Protein Shake'];
-  return items[Math.floor(Math.random() * items.length)];
-};
+// countDown(5);
 
-const wakeUp = () => {
-  takeShower();
-  eatBreakfast();
-  console.log('Ok ready to go to work!');
-};
+// Iteratively (without recursion)
+// const countDown = (num) => {
+//   for (var i = num; i > 0; i--) {
+//     console.log(i);
+//   }
+//   console.log('All done!');
+// };
 
-wakeUp();
+// countDown(7);
