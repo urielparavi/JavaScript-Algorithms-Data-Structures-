@@ -1,9 +1,48 @@
-// 59. Linear Search Solution
-const linearSearch = (arr, val) => {
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] === val) return i;
+// // 63. Binary Search Solution
+// const binarySearch = (arr, elem) => {
+//   var start = 0;
+//   var end = arr.length - 1;
+//   var middle = Math.floor((start + end) / 2);
+//   while (arr[middle] !== elem && start <= end) {
+//     if (elem < arr[middle]) {
+//       end = middle - 1;
+//     } else {
+//       start = middle + 1;
+//     }
+//     middle = Math.floor((start + end) / 2);
+//   }
+//   if (arr[middle] === elem) {
+//     return middle;
+//   }
+//   return -1;
+// };
+
+// 63. Binary Search Solution
+const binarySearch = (arr, elem) => {
+  var start = 0;
+  var end = arr.length - 1;
+  var middle = Math.floor((start + end) / 2);
+  while (arr[middle] !== elem && start <= end) {
+    if (elem < arr[middle]) end = middle - 1;
+    else start = middle + 1;
+    middle = Math.floor((start + end) / 2);
   }
-  return -1;
+  return arr[middle] === elem ? middle : -1;
 };
 
-console.log(linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100));
+console.log(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 13));
+// First loop
+// [2, 5, 6, 9, 13, 15, 28, 30]
+//  S        M               E
+
+// Second loop
+// [2, 5, 6, 9, 13, 15, 28, 30]
+//               S   M       E
+
+// Third loop
+// [2, 5, 6, 9, 13, 15, 28, 30]
+//                      SM   E
+
+// Four loop
+// [2, 5, 6, 9, 13, 15, 28, 30]
+//                          ME  S
