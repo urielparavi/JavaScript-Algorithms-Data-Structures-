@@ -1,25 +1,9 @@
-// 50. Pure Recursion
-const collectOddValues = (arr) => {
-  let newArr = [];
-
-  if (arr.length === 0) {
-    return newArr;
+// 59. Linear Search Solution
+const linearSearch = (arr, val) => {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === val) return i;
   }
-
-  if (arr[0] % 2 !== 0) {
-    newArr.push(arr[0]);
-  }
-
-  newArr = newArr.concat(collectOddValues(arr.slice(1)));
-  return newArr;
+  return -1;
 };
 
-console.log(collectOddValues([1, 2, 3, 4, 5, 6, 7]));
-
-// collectOddValues([1,2,3,4,5])
-// [1].concat(collectOddValues([2,3,4,5]))
-//           [].concat(collectOddValues([3,4,5]))
-//                    [3].concat(collectOddValues([4,5]))
-//                              [].collectOddValues([5])
-//                                        [5].collectOddValues([])
-// [1, 3, 5]
+console.log(linearSearch([34, 51, 1, 2, 3, 45, 56, 687], 100));
