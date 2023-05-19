@@ -1,22 +1,25 @@
-// 49. Helper Method Recursion
+// 50. Pure Recursion
 const collectOddValues = (arr) => {
-  let result = [];
+  let newArr = [];
 
-  const helper = (helperInput) => {
-    if (helperInput.length === 0) {
-      return;
-    }
+  if (arr.length === 0) {
+    return newArr;
+  }
 
-    if (helperInput[0] % 2 !== 0) {
-      result.push(helperInput[0]);
-    }
-    // We call it on everything else in the array, excluding that first element
-    helper(helperInput.slice(1));
-  };
+  if (arr[0] % 2 !== 0) {
+    newArr.push(arr[0]);
+  }
 
-  helper(arr);
-
-  return result;
+  newArr = newArr.concat(collectOddValues(arr.slice(1)));
+  return newArr;
 };
 
-console.log(collectOddValues([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+console.log(collectOddValues([1, 2, 3, 4, 5, 6, 7]));
+
+// collectOddValues([1,2,3,4,5])
+// [1].concat(collectOddValues([2,3,4,5]))
+//           [].concat(collectOddValues([3,4,5]))
+//                    [3].concat(collectOddValues([4,5]))
+//                              [].collectOddValues([5])
+//                                        [5].collectOddValues([])
+// [1, 3, 5]
