@@ -1,22 +1,25 @@
-// 72. Bubble Sort: Optimization
+// 76. Selection Sort: Implementation
 
-// Optimized with noSwaps
-const bubbleSort = (arr) => {
-  var noSwaps;
-  for (var i = arr.length; i > 0; i--) {
-    noSwaps = true;
-    for (var j = 0; j < i - 1; j++) {
-      console.log(arr, arr[j], arr[j + 1]);
-      if (arr[j] > arr[j + 1]) {
-        var temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
-        noSwaps = false;
+const selectionSort = (arr) => {
+  for (var i = 0; i < arr.length; i++) {
+    var lowest = i;
+    for (var j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[lowest]) {
+        lowest = j;
       }
     }
-    if (noSwaps) break;
+    if (i !== lowest) {
+      console.log(i, lowest);
+      var temp = arr[i];
+      arr[i] = arr[lowest];
+      arr[lowest] = temp;
+    }
   }
   return arr;
 };
 
-console.log(bubbleSort([8, 1, 2, 3, 4, 5, 6, 7]));
+console.log(selectionSort([0, 2, 34, 22, 10, 19, 17]));
+// i, j, lowest
+// 0, 1, 1
+// 0, 2, 2
+// 0, 3, 2
