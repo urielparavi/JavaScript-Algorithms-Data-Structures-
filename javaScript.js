@@ -1,17 +1,22 @@
-// 69. Built-In JavaScript Sorting
+// 70. Bubble Sort: Overview
 
-// Compare by numbers
-// const numberCompare = (num1, num2) => {
-//   return num1 - num2;
-// };
-
-// console.log([6, 4, 15, 10].sort(numberCompare));
-
-// Compare by length
-const compareByLen = (str1, str2) => {
-  return str2.length - str1.length;
+const bubbleSort = (arr) => {
+  for (var i = arr.length; i > 0; i--) {
+    for (var j = 0; j < i - 1; j++) {
+      console.log(arr, arr[j], arr[j + 1]);
+      if (arr[j] > arr[j + 1]) {
+        // SWAP!
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+    // console.log('ONE PASS COMPLETE!');
+  }
+  return arr;
 };
 
-console.log(
-  ['Steele', 'Colt', 'Data Structures', 'Algorithms'].sort(compareByLen)
-);
+console.log(bubbleSort([37, 45, 29, 8, 12, 88, -3]));
+// [37, 45, 29, 8]
+// [37, 29, 8, 45]
+// [29, 8, 37, 45]
