@@ -1,48 +1,13 @@
-// // 63. Binary Search Solution
-// const binarySearch = (arr, elem) => {
-//   var start = 0;
-//   var end = arr.length - 1;
-//   var middle = Math.floor((start + end) / 2);
-//   while (arr[middle] !== elem && start <= end) {
-//     if (elem < arr[middle]) {
-//       end = middle - 1;
-//     } else {
-//       start = middle + 1;
-//     }
-//     middle = Math.floor((start + end) / 2);
-//   }
-//   if (arr[middle] === elem) {
-//     return middle;
-//   }
-//   return -1;
-// };
-
-// 63. Binary Search Solution
-const binarySearch = (arr, elem) => {
-  var start = 0;
-  var end = arr.length - 1;
-  var middle = Math.floor((start + end) / 2);
-  while (arr[middle] !== elem && start <= end) {
-    if (elem < arr[middle]) end = middle - 1;
-    else start = middle + 1;
-    middle = Math.floor((start + end) / 2);
+// 66. Naive String Search Implementation
+const naiveSearch = (long, short) => {
+  var count = 0;
+  for (var i = 0; i < long.length; i++) {
+    for (var j = 0; j < short.length; j++) {
+      if (short[j] !== long[i + j]) break;
+      if (j === short.length - 1) count++;
+    }
   }
-  return arr[middle] === elem ? middle : -1;
+  return count;
 };
 
-console.log(binarySearch([2, 5, 6, 9, 13, 15, 28, 30], 13));
-// First loop
-// [2, 5, 6, 9, 13, 15, 28, 30]
-//  S        M               E
-
-// Second loop
-// [2, 5, 6, 9, 13, 15, 28, 30]
-//               S   M       E
-
-// Third loop
-// [2, 5, 6, 9, 13, 15, 28, 30]
-//                      SM   E
-
-// Four loop
-// [2, 5, 6, 9, 13, 15, 28, 30]
-//                          ME  S
+console.log(naiveSearch('lorie loled', 'pop'));
