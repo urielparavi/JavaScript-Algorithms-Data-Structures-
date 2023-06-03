@@ -1,21 +1,30 @@
-// 80. Insertion Sort: Implementation
+// 87. Merging Arrays: Implementation
 
-const insertionSort = (arr) => {
-  for (var i = 1; i < arr.length; i++) {
-    var currentVal = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
-      arr[j + 1] = arr[j];
-      console.log(arr);
+const merge = (arr1, arr2) => {
+  let results = [];
+  let i = 0;
+  let j = 0;
+  while (i < arr1.length && j < arr2.length) {
+    if (arr2[j] > arr1[i]) {
+      results.push(arr1[i]);
+      i++;
+    } else {
+      results.push(arr2[j]);
+      j++;
     }
-    arr[j + 1] = currentVal;
   }
-  return arr;
+  while (i < arr1.length) {
+    results.push(arr1[i]);
+    i++;
+  }
+  while (j < arr2.length) {
+    results.push(arr2[j]);
+    j++;
+  }
+
+  return results;
 };
 
-console.log(insertionSort([2, 1, 9, 7, 6, 4]));
-// console.log(insertionSort([4, 3, 2, 1]));
-
-// [1, 2, 9, 76, 0]
-// [0, 1, 2, 9, 76]        0
-
-// [1, 2, 9, 76]  20
+// console.log(merge([1, 10, 50], [2, 14, 99, 100]));
+// console.log(merge([], [1, 3]));
+console.log(merge([100], [1, 2, 3, 5, 6]));
