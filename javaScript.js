@@ -1,35 +1,60 @@
-// Play 102. Radix Sort: Implementation
+// 106. Data Structures: The Class Keyword
 
-const getDigit = (num, i) => {
-  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
-};
+// class Student {
+//   constructor(firstName, lastName, year) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//     this.grade = year;
+//     this.tardies = 0;
+//     this.scores = [];
+//   }
+//   fullName() {
+//     return `Your full name is ${this.firstName} ${this.lastName}`;
+//   }
+//   markLate() {
+//     this.tardies += 1;
+//     if (this.tardies >= 3) {
+//       return 'YOU ARE EXPELLED!';
+//     }
+//     return `${this.firstName} ${this.lastName} has been late ${this.tardies} times`;
+//   }
+//   addScore(score) {
+//     this.scores.push(score);
+//     return this.scores;
+//   }
+//   calculateAverage() {
+//     let sum = this.scores.reduce(function (a, b) {
+//       return a + b;
+//     });
+//     return sum / this.scores.length;
+//   }
+//   static EnrollStudents() {
+//     return 'ENROLLING STUDENTS!';
+//   }
+// }
 
-const digitCount = (num) => {
-  if (num === 0) {
-    return Math.floor(Math.log10(Math.abs(num))) + 1;
+// let firstStudent = new Student('Emil', 'katz', 3);
+// let secondStudent = new Student('Avi', 'choen', 2);
+
+// // console.log(firstStudent);
+// // console.log(secondStudent);
+// console.log(firstStudent.fullName());
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
-};
 
-const mostDigits = (nums) => {
-  let maxDigits = 0;
-  for (let i = 0; i < nums.length; i++) {
-    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+  static distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = (a.y = b.y);
+
+    return Math.hypot(dx, dy);
   }
-};
+}
 
-const radixSort = (nums) => {
-  let maxDigitCount = mostDigits(nums);
-  for (let k = 0; k < maxDigitCount; k++) {
-    let digitBuckets = Array.from({ length: 10 }, () => []);
-    for (let i = 0; i < nums.length; i++) {
-      let digit = getDigit(nums[i], k);
-      digitBuckets[digit].push(nums[i]);
-    }
-    console.log(digitBuckets);
-    nums = [].concat(...digitBuckets);
-    console.log(nums);
-  }
-  return nums;
-};
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
 
-console.log(radixSort([23, 345, 5467, 12, 2345, 9852]));
+console.log(Point.distance(p1, p2));
