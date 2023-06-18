@@ -1,4 +1,4 @@
-// 111. Starter Code and Push Intro
+// 116. Singly Linked List: Shift Solution
 
 // Piece of data - val
 // Reference to next node
@@ -29,6 +29,7 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+  // Remove from the end
   pop() {
     if (!this.head) return undefined;
     let current = this.head;
@@ -46,27 +47,59 @@ class SinglyLinkedList {
     }
     return current;
   }
-  // traverse() {
-  // traverse() {
-  //   let current = this.head;
-  //   while (current) {
-  //     console.log(current.val);
-  //     current = current.next;
-  //   }
-  // }
+  // Remove from the start
+  shift() {
+    if (!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return currentHead;
+  }
+  // Adding to the start
+  unshift(val) {
+    let newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    while (counter !== index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+  set(index, val) {
+    let foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
+// HEAD
+// "*" -> "HELLO" -> "GOODBYE" -> "!"
 
 let list = new SinglyLinkedList();
 list.push('HELLO');
 list.push('GOODBYE');
 list.push('!');
+list.push('<3');
+list.push(':');
 
 // HELLO -> GOODBYE -> !
 // c
 // nt
-
-// let first = new Node('Hi');
-// first.next = new Node('there');
-// first.next.next = new Node('how');
-// first.next.next.next = new Node('are');
-// first.next.next.next.next = new Node('you');
