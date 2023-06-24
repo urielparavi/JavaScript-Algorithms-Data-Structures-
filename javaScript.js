@@ -1,4 +1,4 @@
-// 116. Singly Linked List: Shift Solution
+// 124. Singly Linked List: Insert Solution
 
 // Piece of data - val
 // Reference to next node
@@ -89,17 +89,59 @@ class SinglyLinkedList {
     }
     return false;
   }
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) return !!this.push(val);
+    if (index === 0) return !!this.unshift(val);
+    let newNode = new Node(val);
+    let prev = this.get(index - 1);
+    let temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let previousNode = this.get(index - 1);
+    let removed = previousNode.next();
+    previousNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
+    // [100, 201, 250, 350, 999]
+  }
+  print() {
+    let arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    console.log(arr);
+  }
 }
-// HEAD
-// "*" -> "HELLO" -> "GOODBYE" -> "!"
 
 let list = new SinglyLinkedList();
-list.push('HELLO');
-list.push('GOODBYE');
-list.push('!');
-list.push('<3');
-list.push(':');
+list.push(100);
+list.push(201);
+list.push(250);
+list.push(350);
+list.push(999);
 
-// HELLO -> GOODBYE -> !
-// c
-// nt
+console.log(list.print());
