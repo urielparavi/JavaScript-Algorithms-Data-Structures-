@@ -1,25 +1,52 @@
-// 152. Creating a Stack with an Array
-let stack = [];
-stack.push('google');
+// 153. Writing Our Own Stack From Scratch
 
-stack.push('instagram');
+// let stack = [];
 
-stack.push('youtube');
+// stack.push('FIRST');
 
-stack.pop();
+// stack.push('SECOND');
 
-stack.pop();
+// stack.push('THIRD');
 
-stack.push('amazon');
+// stack.push('FOURTH');
 
-stack.pop();
+// stack.pop();
 
-stack.unshift('create new file');
+// console.log(stack);
 
-stack.unshift('resized file');
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
 
-stack.unshift('cloned out wrinkle');
-
-stack.shift();
-
-console.log(stack);
+class Stack {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
+  push(val) {
+    let newNode = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      let temp = this.first;
+      this.first = newNode;
+      this.first.next = temp;
+    }
+    return ++this.size;
+  }
+  pop() {
+    if (!this.first) return null;
+    let temp = this.first;
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.value;
+  }
+}
