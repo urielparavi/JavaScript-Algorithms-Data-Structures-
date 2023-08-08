@@ -1,19 +1,4 @@
-// 153. Writing Our Own Stack From Scratch
-
-// let stack = [];
-
-// stack.push('FIRST');
-
-// stack.push('SECOND');
-
-// stack.push('THIRD');
-
-// stack.push('FOURTH');
-
-// stack.pop();
-
-// console.log(stack);
-
+// 157. Writing Our Own Queue From Scratch
 class Node {
   constructor(value) {
     this.value = value;
@@ -21,26 +6,26 @@ class Node {
   }
 }
 
-class Stack {
+class Queue {
   constructor() {
     this.first = null;
     this.last = null;
     this.size = 0;
   }
-  push(val) {
+  enqueue(val) {
     let newNode = new Node(val);
     if (!this.first) {
       this.first = newNode;
       this.last = newNode;
     } else {
-      let temp = this.first;
-      this.first = newNode;
-      this.first.next = temp;
+      this.last.next = newNode;
+      this.last = newNode;
     }
     return ++this.size;
   }
-  pop() {
+  dequeue() {
     if (!this.first) return null;
+
     let temp = this.first;
     if (this.first === this.last) {
       this.last = null;
