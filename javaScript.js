@@ -1,129 +1,76 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-}
-
-class BinarySearchTree {
+class MaxBinaryHeap {
   constructor() {
-    this.root = null;
+    this.values = [];
   }
-  insert(value) {
-    var newNode = new Node(value);
-    if (this.root === null) {
-      this.root = newNode;
-      return this;
+  insert(element) {
+    this.values.push(element);
+    this.bubbleUp();
+  }
+  bubbleUp() {
+    let idx = this.values.length - 1;
+    const element = this.values[idx];
+    while (idx > 0) {
+      let parentIdx = Math.floor((idx - 1) / 2);
+      let parent = this.values[parentIdx];
+      if (element <= parent) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
     }
-    var current = this.root;
+  }
+  // [12, 39, 41, 18, 27]
+
+  extractMax() {
+    // EDGE CASE COME BACK TO THIS!
+    const max = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
+    }
+    return max;
+  }
+  //  0   1   2
+  // [41, 39, 33, 18, 27, 12]
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
     while (true) {
-      if (value === current.value) return undefined;
-      if (value < current.value) {
-        if (current.left === null) {
-          current.left = newNode;
-          return this;
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild > element) {
+          swap = leftChildIdx;
         }
-        current = current.left;
-      } else {
-        if (current.right === null) {
-          current.right = newNode;
-          return this;
+      }
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (swap === null && rightChild > element) ||
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIdx;
         }
-        current = current.right;
       }
+
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
     }
-  }
-  find(value) {
-    if (this.root === null) return false;
-    var current = this.root,
-      found = false;
-    while (current && !found) {
-      if (value < current.value) {
-        current = current.left;
-      } else if (value > current.value) {
-        current = current.right;
-      } else {
-        found = true;
-      }
-    }
-    if (!found) return undefined;
-    return current;
-  }
-  contains(value) {
-    if (this.root === null) return false;
-    var current = this.root,
-      found = false;
-    while (current && !found) {
-      if (value < current.value) {
-        current = current.left;
-      } else if (value > current.value) {
-        current = current.right;
-      } else {
-        return true;
-      }
-    }
-    return false;
-  }
-  BFS() {
-    let node = this.root,
-      data = [],
-      queue = [];
-    queue.push(node);
-    while (queue.length) {
-      node = queue.shift();
-      data.push(node.value);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
-    return data;
-  }
-  DFSPreOrder() {
-    let data = [];
-    function traverse(node) {
-      data.push(node.value);
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
-    }
-    traverse(this.root);
-    return data;
-  }
-  DFSPostOrder() {
-    let data = [];
-    function traverse(node) {
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
-      data.push(node.value);
-    }
-    traverse(this.root);
-    return data;
-  }
-  DFSInOrder() {
-    let data = [];
-    function traverse(node) {
-      node.left && traverse(node.left);
-      data.push(node.value);
-      node.right && traverse(node.right);
-    }
-    traverse(this.root);
-    return data;
   }
 }
 
-// QUEUE: [15, 3, 8]
-// DATA: [10, 6]
-// [10, 6, 15, 3, 8, 20]
-
-//                  10
-//             6          15
-//          3     8            20
-
-var tree = new BinarySearchTree();
-tree.insert(10);
-tree.insert(6);
-tree.insert(15);
-tree.insert(3);
-tree.insert(8);
-tree.insert(20);
-console.log(tree.DFSPreOrder());
-console.log(tree.DFSPostOrder());
+let heap = new MaxBinaryHeap();
+heap.insert(41);
+heap.insert(39);
+heap.insert(33);
+heap.insert(18);
+heap.insert(27);
+heap.insert(12);
+heap.insert(55);
